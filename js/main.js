@@ -1,4 +1,10 @@
-
+    var textNombre="Nombre validos";
+function crearNodo(	contenedor , mensaje)
+{
+	var nodo = document.createElement("span");
+	nodo.innerText = mensaje;
+	contenedor.appendChild(nodo);
+}
 
 //validar que todos los campos esten llenos
 function validateForm()
@@ -17,7 +23,7 @@ function validateForm()
    	return false;
   } 
 }	
-
+/*
 //valida solo letras en el campo de nombres y apellidos
 function checkInput(evt)
 {
@@ -27,7 +33,7 @@ function checkInput(evt)
   else
   	//salida_name.innerHTML="<span style='color:red; font-size:15px;' >Debes escribir letras</span>";
     evt.preventDefault();
-}
+} */
 //convierte la primera letra en mayuscula
 function validaName() 
 {
@@ -48,9 +54,8 @@ function validaName()
           if(nombreArray[i] == " ")
               cortePalabra = true;
         } 
-
-        salida_name.innerHTML="<span style='color:white; font-size:15px;' >Apellido valido ?</span>";  
-        document.getElementById("name").value = primeraMayus; 
+	crearNodo(contenedorName,textNombre);
+    document.getElementById("name").value = primeraMayus; 
  }
 //valida el apellido segun el formato valido
 function validaLastname() 
