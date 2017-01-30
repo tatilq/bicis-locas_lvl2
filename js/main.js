@@ -1,29 +1,33 @@
-
-//funcion que cree nodos 
-function crearNodo(	contenedor , mensaje)
+//VARIABLES GOBLALES DE LOS CONTENEDORES 
+var contenedorName=document.getElementById("contenedorName");
+var contenedorLastname=document.getElementById("contenedorLastname");
+var contenedorEmail=document.getElementById("contenedorEmail");
+var contenedorPassword=document.getElementById("contenedorPassword");
+var contenedorBici=document.getElementById("contenedorBici");
+//FUNCION QUE CREA NODOS (SPAN)
+function crearNodo( contenedor , mensaje)
 {
-	var nodo = document.createElement("span");
-	nodo.innerText = mensaje;
-	contenedor.appendChild(nodo);
+  var nodo = document.createElement("span");
+  nodo.innerText = mensaje;
+  contenedor.appendChild(nodo);
 }
-//funcion valida formulario
+//FUNCION PRINCIPAL LLAMA A LAS DEMAS FUNCIONES
+//NO SE PUEDE MANDAR EL FORMULARIO SI LOS CAMPOS NO SON CORRECTOS
 function validateForm()
 {    
   var salida_form=document.getElementById("salida_form");
-  validaName(event);
- validaLastname(event);
- validaEmail(event);
-  validaPass(event);
-  validaBici(event);
-
-  /*if(!name &&  !apellido && !email && !pass && !bici)
-      salida_form.innerHTML='<p style="color:red;">Llena el formulario correctamente</p>';
+  validaName();
+  validaLastname(); 
+  validaEmail(); 
+  validaPass(); 
+  validaBici();
+      
+  if(validaName() == true && validaLastname()==true && validaEmail()==true && validaPass()==true && validaBici()==true)
+      salida_form.innerHTML='<p style="color:green;">Formulario Enviado Correctamente ✔</p>';  
   else
-      salida_form.innerHTML='<p style="color:green;">Formulario Lleno</p>';*/
-
-
+     salida_form.innerHTML='<p style="color:red;">Llena todos los campos correctamente</p>';
 }
-//solo se pueden ingresar numeros x el teclado
+//SOLO INGRESAR NUMEROS POR EL TECLADO
 function checkInput(evt)
 {
   if(window.event.keyCode >='65' && window.event.keyCode<='90' || window.event.keyCode =='8' || window.event.keyCode =='32')
@@ -31,7 +35,7 @@ function checkInput(evt)
   else
     evt.preventDefault();
 }
-//convierte la primera letra de una palabra en mayuscula
+// CONVIERTE LA PRIMERA LETRA EN MAYUSCULA
 function primMayuscula(id)
 {
     var nombreArray = id.split("");
@@ -51,105 +55,107 @@ function primMayuscula(id)
               cortePalabra = true;
         }
     return primeraMayus;
-}	
-//convierte la primera letra en mayuscula
-function validaName(evt) 
+} 
+//VALIDA NOMBRE SEGUN FORMATO VALIDO
+function validaName() 
 {
- var name = document.getElementById("name").value; 
- var nombre = document.getElementById("name"); 
- console.log(evt.target.parentNode);
-  var flag=true;
- if(name.length > 0)
+ var name = document.getElementById("name"); 
+  var flag=false;
+ if(name.value.length > 0)
   {
     
-    var letra=primMayuscula(name);
+    var letra=primMayuscula(name.value);
     document.getElementById("name").value = letra; 
-   
-    crearNodo( evt.target.parentNode,"Nombre Valido ✔");
-     evt.target.parentNode.removeChild(evt.target.nextSibling);
+    crearNodo( contenedorName,"Nombre Valido ✔");
+    contenedorName.removeChild(name.nextSibling);
+     
+     flag=true;
   }
-  else{
+  if(name.value.length == 0){
     
     crearNodo(contenedorName,"Debes Ingresar Nombre");
-    evt.target.parentNode.removeChild(evt.target.nextSibling);
+    contenedorName.removeChild(name.nextSibling);
     flag=false;
   }
   return flag;
 }
-//valida el apellido segun el formato valido
-function validaLastname(evt) 
+//VALIDA EL APELLIDO SEGUN FORMATO DADO
+function validaLastname() 
 {
-  var lastname = document.getElementById("lastname").value;    
-  var flag=true;
-  if(lastname.length > 0)
+  var lastname = document.getElementById("lastname");    
+  var flag=false;
+  if(lastname.value.length > 0)
   {
     
-    var letra=primMayuscula(lastname);
+    var letra=primMayuscula(lastname.value);
     document.getElementById("lastname").value = letra; 
     
-    crearNodo( evt.target.parentNode,"Apellido Valido ✔");
-    evt.target.parentNode.removeChild(evt.target.nextSibling);
+    crearNodo( contenedorLastname,"Apellido Valido ✔");
+    contenedorLastname.removeChild(lastname.nextSibling);
+    flag=true;
   }
-  else{
+  if(lastname.value.length == 0){
     
     crearNodo(contenedorLastname,"Debes Ingresar Apellido ");
-    evt.target.parentNode.removeChild(evt.target.nextSibling);
+    contenedorLastname.removeChild(lastname.nextSibling);
     flag=false;
   }
-  
   return flag;
 }
-//valida el email segun el formato valido
-function validaEmail(evt) 
+//VALIDA EMAIL SEGUN FORMATO DADO
+function validaEmail() 
 { 
   var email = document.getElementById("input-email");
-  var flag=true;
+  var flag=false;
  if(email.value.length > 0 && email.value.match(/^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)){
     
-    evt.target.parentNode.removeChild(evt.target.nextSibling);//elimino el anterior nodo
-    crearNodo(contenedorEmail,"Email Valido ✔");//creo un nuevo nodo
+    crearNodo(contenedorEmail,"Email Valido ✔");
+    contenedorEmail.removeChild(email.nextSibling);
+    
     flag=true;
   }
   else
   {
-    crearNodo(contenedorEmail,"Verifique su email");
-    evt.target.parentNode.removeChild(evt.target.nextSibling);
+    crearNodo(contenedorEmail,"Debes ingresar un email valido");
+    contenedorEmail.removeChild(email.nextSibling);
     flag=false;
   }
   return flag;
 }
-//valida la contraseña, el minimo 6 caracteres
-function validaPass(evt)
+//VALIDA CONTRASEÑA SEGUN FORMATO DADO
+function validaPass()
 {
-  var password = document.getElementById("input-password").value;
-  var flag=true;
-  if (!password.match(/.{6,}/) || password == "123456" || password.toLowerCase() == "password" || password == "098754")
+  var password = document.getElementById("input-password");
+  var flag=false;
+  if (!password.value.match(/.{6,}/) || password.value == "123456" || password.value.toLowerCase() == "password" || password.value == "098754")
   {
-    crearNodo(contenedorPassword,"Contraseña Invalida");
-    evt.target.parentNode.removeChild(evt.target.nextSibling);//elimino el anterior nodo
+    crearNodo(contenedorPassword,"Debes Ingresar una contraseña valida");
+    contenedorPassword.removeChild(password.nextSibling);
     flag=false;
   }
   else
   {
-    evt.target.parentNode.removeChild(evt.target.nextSibling);
-   crearNodo(contenedorPassword,"Password Valido ✔");//creo un nuevo nodo
+    contenedorPassword.removeChild(password.nextSibling);
+   crearNodo(contenedorPassword,"Contraseña Valida ✔");
     flag=true;
   }
   return flag;
 }
-function validaBici(evt)
+//VALIDA QUE SELECCIONES UN TIPO DE BICICLETA
+function validaBici()
 {
   var tipo = document.querySelector("select");
-  var flag=true;    
+  var flag=false;    
 
   if(tipo.value != 0){
-       crearNodo(contenedorBici,"Bici seleccionada ✔");
+    contenedorBici.removeChild(tipo.nextSibling);
+       crearNodo(contenedorBici,"Bicicleta seleccionada ✔");
        flag=true;
   } 
   else
   {   
-      evt.target.parentNode.removeChild(evt.target.nextSibling);
-      crearNodo(contenedorBici,"Seleccionada una bici");
+      contenedorBici.removeChild(tipo.nextSibling);
+      crearNodo(contenedorBici,"Debes seleccionar un tipo de  Bicicleta");
       flag=false;
   }
    return flag;    
