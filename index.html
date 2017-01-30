@@ -23,27 +23,27 @@
           <div class="name-container input-box" id="contenedorName">
             <label for="name" class="sr-only">Nombre</label>
             <input type="text" id="name" class="form-control"
-            placeholder="Ingrese su nombre" onKeydown="checkInput(event)" onkeyUp="validaName()" onClick="validaName()" >
+            placeholder="Ingrese su nombre" onkeydown="checkInput(event)" onkeyup="validaName(event)"  >
           </div>
           <div class="lastname-container input-box" id="contenedorLastname">
             <label for="lastname" class="sr-only">Apellido</label>
             <input type="text" id="lastname" class="form-control"
-            placeholder="Ingrese su apellido" onkeyDown="checkInput(event)"  name="l"  onkeyUp="validaLastname()" onClick="validaLastname()">
+            placeholder="Ingrese su apellido" onkeydown="checkInput(event)"  name="l"  onkeyup="validaLastname(event)" >
           </div>
           <div class="email-container input-box" id="contenedorEmail">
             <label for="inputEmail" class="sr-only">
               Correo Electrónico
             </label>
-            <input type="email" id="input-email" class="form-control" placeholder="Ingrese su correo electrónico" autofocus=""  onkeyUp="validaEmail()" onclick="validaEmail()" >
+            <input type="email" id="input-email" class="form-control" placeholder="Ingrese su correo electrónico" autofocus=""  onkeyup="validaEmail(event)">
           </div>
           <div class="form-group input-box" id="contenedorPassword">
             <label for="inputPassword" class="sr-only">
               Contraseña
             </label>
-            <input type="password" id="input-password" class="form-control" placeholder="Ingrese su contraseña" onkeyUp="validaPass()" onclick="validaPass()" >
+            <input type="password" id="input-password" class="form-control" placeholder="Ingrese su contraseña" onkeyup="validaPass(event)" >
           </div>
-          <div class="form-group input-box"  id="contenedorBici">
-            <select class="form-control" id="select_bici" onClick="validaBici()">
+          <div class="form-group input-box"  id="contenedorBici" onclick="validaBici(event)">
+            <select class="form-control" id="select_bici">
               <option value="0">Selecciona tu tipo de bici</option>
               <option value="urbana">Urbana</option>
               <option value="treking">Treking</option>
@@ -61,7 +61,7 @@
               <span>Deseo recibir información vía email</span>
             </label>
           </div>
-          <button class="btn btn-lg btn-primary btn-block submit-btn" type="submit" onClick="validateForm()">Registrar</button>
+          <button class="btn btn-lg btn-primary btn-block submit-btn" type="submit" onclick="validateForm()" >Registrar</button>
           <div id="salida_form"></div>
         </form>
       </div>  
