@@ -5,6 +5,11 @@ function crearNodo( contenedor , mensaje)
   nodo.innerText = mensaje;
   contenedor.appendChild(nodo);
 }
+//-------------------------------FUNCION QUE ELIMINA NODOS (SPAN)-----------------------------------//
+function eliminarNodo( contenedor , campo)
+{
+  contenedor.removeChild(campo.nextSibling);
+}
 //-------------------------------FUNCION PRINCIPAL LLAMA A LAS DEMAS FUNCIONES---------------------//
 //------------------------NO SE PUEDE MANDAR EL FORMULARIO SI LOS CAMPOS NO SON CORRECTOS----------//
 function validateForm()
@@ -48,15 +53,15 @@ function validaName()
   var name = document.getElementById("name"); 
   var isValid=false;
  if(name.value.length > 0 && name.value.match(/^[a-zA-Z\s]*$/)){
-    var letra=primMayuscula(name.value);
-    document.getElementById("name").value = letra; 
+    var palabra=primMayuscula(name.value);
+    document.getElementById("name").value = palabra; 
     crearNodo( contenedorName,"Nombre Valido ✔.");
-    contenedorName.removeChild(name.nextSibling);
+    eliminarNodo(contenedorName,name);
     isValid=true;
   }
   else{
     crearNodo(contenedorName,"Debes Ingresar un nombre valido (solo letras).");
-    contenedorName.removeChild(name.nextSibling);
+    eliminarNodo(contenedorName,name);
     isValid=false;
   }
   return isValid;
@@ -67,15 +72,15 @@ function validaLastname()
   var lastname = document.getElementById("lastname");    
   var isValid=false;
   if(lastname.value.length > 0 && lastname.value.match(/^[a-zA-Z\s]*$/)){
-    var letra=primMayuscula(lastname.value);
-    document.getElementById("lastname").value = letra;  
+    var palabra=primMayuscula(lastname.value);
+    document.getElementById("lastname").value = palabra;  
     crearNodo( contenedorLastname,"Apellido Valido ✔.");
-    contenedorLastname.removeChild(lastname.nextSibling);
+    eliminarNodo(contenedorLastname,lastname);
     isValid=true;
   }
   else{ 
     crearNodo(contenedorLastname,"Debes Ingresar un apellido valido (solo letras).");
-    contenedorLastname.removeChild(lastname.nextSibling);
+    eliminarNodo(contenedorLastname,lastname);
     isValid=false;
   }
   return isValid;
@@ -88,12 +93,12 @@ function validaEmail()
  if(email.value.length > 0 && email.value.match(/^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)){
     
     crearNodo(contenedorEmail,"Email Valido ✔.");
-    contenedorEmail.removeChild(email.nextSibling); 
+    eliminarNodo(contenedorEmail,email);
     isValid=true;
   }
   else{
     crearNodo(contenedorEmail,"Debes Ingresar un email valido.");
-    contenedorEmail.removeChild(email.nextSibling);
+    eliminarNodo(contenedorEmail,email);
     isValid=false;
   }
   return isValid;
@@ -105,12 +110,12 @@ function validaPass()
   var isValid=false;
   if (!password.value.match(/.{6,}/) || password.value == "123456" || password.value.toLowerCase() == "password" || password.value == "098754"){
     crearNodo(contenedorPassword,"Debes Ingresar una contraseña valida.");
-    contenedorPassword.removeChild(password.nextSibling);
+    eliminarNodo(contenedorPassword,password);
     isValid=false;
   }
   else{
-    contenedorPassword.removeChild(password.nextSibling);
-   crearNodo(contenedorPassword,"Contraseña Valida ✔.");
+    eliminarNodo(contenedorPassword,password);
+    crearNodo(contenedorPassword,"Contraseña Valida ✔.");
     isValid=true;
   }
   return isValid;
@@ -121,13 +126,13 @@ function validaBici()
   var tipo = document.querySelector("select");
   var isValid=false;    
   if(tipo.value != 0){
-    contenedorBici.removeChild(tipo.nextSibling);
-      crearNodo(contenedorBici,"Bicicleta seleccionada ✔.");
-      isValid=true;
+    eliminarNodo(contenedorBici,tipo);
+    crearNodo(contenedorBici,"Bicicleta seleccionada ✔.");
+    isValid=true;
   } 
   else
   {   
-    contenedorBici.removeChild(tipo.nextSibling);
+    eliminarNodo(contenedorBici,tipo);
     crearNodo(contenedorBici,"Debes seleccionar un tipo de  Bicicleta.");
     isValid=false;
   }
