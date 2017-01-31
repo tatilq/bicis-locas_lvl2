@@ -12,8 +12,7 @@ function eliminarNodo( contenedor , campo)
 }
 //-------------------------------FUNCION PRINCIPAL LLAMA A LAS DEMAS FUNCIONES---------------------//
 //------------------------NO SE PUEDE MANDAR EL FORMULARIO SI LOS CAMPOS NO SON CORRECTOS----------//
-function validateForm()
-{    
+function validateForm(){    
   var salida_form=document.getElementById("salida_form");
   validaName();
   validaLastname(); 
@@ -26,9 +25,8 @@ function validateForm()
   else
      salida_form.innerHTML='<p style="color:red;">Llena todos los campos correctamente</p>';
 }
-//----------------------------------------CONVIERTE LA PRIMERA LETRA EN MAYUSCULA-----------------------------------//
-function primMayuscula(id)
-{
+//----------------------------------------CONVIERTE LA PRIMERA LETRA EN MAYUSCULA---------------------------------//
+function primMayuscula(id){
     var nombreArray = id.split("");
     var primeraLetra = nombreArray[0];
     var primeraMayus = primeraLetra.toUpperCase();
@@ -90,8 +88,7 @@ function validaEmail()
 { 
   var email = document.getElementById("input-email");
   var isValid=false;
- if(email.value.length > 0 && email.value.match(/^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)){
-    
+ if(email.value.length > 0 && email.value.match(/^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)){  
     crearNodo(contenedorEmail,"Email Valido ✔.");
     eliminarNodo(contenedorEmail,email);
     isValid=true;
@@ -130,12 +127,11 @@ function validaBici()
     crearNodo(contenedorBici,"Bicicleta seleccionada ✔.");
     isValid=true;
   } 
-  else
-  {   
+  else{   
     eliminarNodo(contenedorBici,tipo);
     crearNodo(contenedorBici,"Debes seleccionar un tipo de  Bicicleta.");
     isValid=false;
   }
    return isValid;    
 }   
-//_----------------------------------------------------------FIN-------------------------------------------------------//
+//---------------------------------------------------------FIN-------------------------------------------------------//
